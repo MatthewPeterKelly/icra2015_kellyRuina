@@ -1,0 +1,6 @@
+# Autosave Files:
+*.*~
+
+# Matlab automatically generated mex files:
+codegen/
+

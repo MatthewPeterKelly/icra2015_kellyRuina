@@ -12,7 +12,7 @@ We use the inverted pendulum model of walking, collapsing all of the robot's mas
 
 The state of the robot can be represented by a single number: the velocity of the hip at mid-stance.
 
-Like-wise, the net effect of control actions can be represented by two numbers: the step length and push-off impulse, both of which are bounded.
+Like-wise, the net effect of all control actions can be represented by two numbers: the step length and push-off impulse, both of which are bounded.
 
 The step length captures all motions of the swing leg, while the push-off impulse represents the rapid extension of the stance leg before the step transition.
 

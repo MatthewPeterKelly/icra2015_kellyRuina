@@ -1,0 +1,50 @@
+Hi, I’m  Matthew Kelly, a PhD student working at Cornell with Andy Ruina. 
+
+Today I'm going to give a brief presentation about non-linear robust control for a simple model of walking.
+
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Our controller tries to regulate some forward walking speed while completely preventing all falls, given a bounded set of disturbances. 
+
+~~~~~~~~~~~~~~~~~~~~~~~
+
+We use the inverted pendulum model of walking, collapsing all of the robot's mass to a point at the hip, and assuming a fixed length stance leg.
+
+The state of the robot can be represented by a single number: the velocity of the hip at mid-stance.
+
+Like-wise, the net effect of all control actions can be represented by two numbers: the step length and push-off impulse, both of which are bounded.
+
+The step length captures all motions of the swing leg, while the push-off impulse represents the rapid extension of the stance leg before the step transition.
+
+Despite its simplicity, this model captures many of the key features of bipedal walking control.
+
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The robot should never fall down, despite  bounded, but otherwise arbitrary, perturbations to the leg length, mid-stance speed, step length, and push-off impulse. 
+
+We consider two types of failure. The first occurs when the robot is moving too fast, causing it to enter a flight phase. The second failure is when the robot is moving too slowly, falling over backward before reaching mid-stance.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The controller is a policy that maps the velocity at mid-stance to the desired step length and push-off impulse. It is computed as the solution to an optimization problem: minimize error in walking speed at the next step while preventing all falls, given the set of maximal disturbances.
+
+Once the controller is designed, we prove it is prevents falls for all possible disturbances.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Using this methodology, we designed controllers for slow, medium, and fast walking. One interesting result is that the step length controller is essentially non-linear. To change its speed, either to go faster or to go slower, the robot increases its step length.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We verify the controller's performance by computing the set of initial speeds that are guaranteed to converge to the goal set without falling, given all allowable disturbances.
+
+We find that most possible initial speeds are safe and converge to the goal set within a few steps. 
+
+In the absence of disturbances, the controller typically converges to the goal set within a single step.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In summary, within the bounds of our model, we have found a controller for steady walking that is perfectly robust:  it regulates walking speed while preventing all falls for any given bounded disturbance.  
+
+Perhaps a controller of this general type can be used, at a high level, to control a more complex real machine.
+

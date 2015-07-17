@@ -1,0 +1,10 @@
+Hi, My name is Matthew Kelly. Today I'm going to give a brief talk about a way to design a nonlinear robust walking controller, for a simple model of walking.
+
+A robust walking controller is one that can regulate some forward walking speed, while completly preventing falls, given some bounded disturbance model.
+
+For this research, we use the inverted pendulum model of walking. The full mass of the robot is collapsed to a point at the hip, and both legs are massless and inextensible. Additionally, we assume that there are no torques at the ankle.
+
+A single step of the inverted pendulum model starts at mid-stance, with the supporting leg vertcal. From this point, the hip thes swings down to the desired step length, and an impulsive push-off is applied to the trailing leg. Next, an impulsive collision occurs on the leading leg, which then swings up to the next mid-stance.
+
+The net effect of all actions during the step can be distilled into two numbers. The first is the step length, which captures the effects of the upper and swing leg motion, and the second is the push-off impulse, a proxy for the rapid extension of the trailing leg before heel-strike. For this research, both of these actuators are bounded.
+

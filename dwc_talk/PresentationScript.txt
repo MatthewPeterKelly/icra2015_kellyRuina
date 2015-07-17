@@ -1,10 +1,61 @@
-Hi, My name is Matthew Kelly. Today I'm going to give a brief talk about a way to design a nonlinear robust walking controller, for a simple model of walking.
+Hi, My name is Matthew Kelly. Today I'm going to give a brief talk a nonlinear robust controller, for a simple model of walking.
 
-A robust walking controller is one that can regulate some forward walking speed, while completly preventing falls, given some bounded disturbance model.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A robust walking controller is one that can regulate some forward walking speed, while completely preventing falls, given some bounded disturbance model.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For this research, we use the inverted pendulum model of walking. The full mass of the robot is collapsed to a point at the hip, and both legs are massless and inextensible. Additionally, we assume that there are no torques at the ankle.
 
-A single step of the inverted pendulum model starts at mid-stance, with the supporting leg vertcal. From this point, the hip thes swings down to the desired step length, and an impulsive push-off is applied to the trailing leg. Next, an impulsive collision occurs on the leading leg, which then swings up to the next mid-stance.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The net effect of all actions during the step can be distilled into two numbers. The first is the step length, which captures the effects of the upper and swing leg motion, and the second is the push-off impulse, a proxy for the rapid extension of the trailing leg before heel-strike. For this research, both of these actuators are bounded.
+A single walking step starts at mid-stance, with the supporting leg vertical. From this point, the hip swings down to the desired step length, and an impulsive push-off is applied to the back leg. Next, an impulsive collision occurs on the front leg. The step concludes with the hip swinging back up to the next mid-stance.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This simple model has two control actions. The first is the step length, which captures the net effect of all upper-body and swing leg motions. The second is an impulsive push-off, which is a proxy for the rapid extension of the rear leg immediately before heel-strike. We assume that both the step length and push-off impulse are bounded.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For the purposes of control, we represent the state of the robot by the speed at mid-stance. 
+
+[add more info]
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We consider a variety of disturbances. Perturbations to leg length are a proxy for modeling error, and we include a noise term when measuring the mid-stance speed on each step. Additionally, we apply perturbations to the step length and push-off impulse.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+There are two failure modes for our simple model. The first occurs when the robot is moving too slowly to swing up to mid-stance, causing it to fall over backward. The second occurs when the disturbances speed up the hip mass enough that the leg is no longer in compression, and the model enters a flight phase.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The controller is a policy that maps from the estimated speed at mid-stance, to the target step length and push-off impulse.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Once the controller is designed, we need to demonstrate that it actually does prevent falls and regulate walking speed. We do this by computing the forward reachable set, given the controller and all possible disturbances. 
+
+We start at step zero with all non-fallen states, as shown by the vertical bar on the left of the plot. The states that are shown in red are unsafe - there is some disturbance that can cause the robot to fall on the next step. The remaining states, shown in blue, are safe: there is no disturbance that can cause the robot to fall on the next step.
+
+The remaining blue bars show how the controller drives system towards the target speed, reaching steady state within three steps. In the absence of disturbances the controller will generally reach the target speed in a single step.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In summary, I've presented a method for designing a non-linear robust controller for a simple model of walking. The resulting controller is able to completely prevent falls, while regulating the desired walking speed. 
+
+Thank you for your time, and I'm happy to answer any questions.
+
+
+
+
+
+
 

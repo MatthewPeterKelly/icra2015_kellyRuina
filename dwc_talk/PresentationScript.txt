@@ -18,14 +18,7 @@ This simple model has two control actions. The first is the step length, which c
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For the purposes of control, we represent the state of the robot by the speed at mid-stance. 
-
-[add more info]
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
+One of the nice features of this model is that there is a simple mapping from the mid-stance speed at one step to the mid-stance speed at the next step. 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -37,7 +30,9 @@ There are two failure modes for our simple model. The first occurs when the robo
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The controller is a policy that maps from the estimated speed at mid-stance, to the target step length and push-off impulse.
+The controller is a policy that maps from the estimated speed at mid-stance, to the target step length and push-off impulse. It is designed using constrained optimization, which minimizes the speed error at the next step, while preventing falls. This optimization uses a set of maximal disturbances, where each disturbance is at either a maximum or minimum value.
+
+After the controller is designed, we then perform a verification to show that the controller prevents falls for all disturbances, not just the corner cases.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
